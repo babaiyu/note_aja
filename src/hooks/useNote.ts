@@ -15,20 +15,6 @@ export function useNote() {
 
   const [notes, setNotes] = useState<NoteProps[]>([]);
 
-  useEffect(() => {
-    const loadSaved = async () => {
-      let result = [];
-      const noteString = await get(NOTES);
-      const allNote = (noteString ? JSON.parse(noteString) : []) as NoteProps[];
-      if (!isPlatform('hybrid')) {
-        for (let note of allNote) result.push(note);
-        setNotes(result);
-      }
-    };
-
-    loadSaved();
-  }, [get]);
-
   const saveNote = async (data: NoteProps) => {
     const newNotes = [data, ...notes];
     setNotes(newNotes);
@@ -41,5 +27,19 @@ export function useNote() {
     setNotes(newNotes);
   };
 
-  return {saveNote, deleteNote, notes};
+  const loadSaved = async () => {
+    let result = [];
+    const noteString = await get(NOTES);
+    const allNote = (noteString ? JSON.parse(noteString) : []) as NoteProps[];
+    if (!isPlatform('hybrid')) {
+      for (let note of allNote) result.push(note);
+      setNotes(result);
+    }
+  };
+
+  useEffect(() => {
+    loadSaved();
+  }, [get, set]);
+
+  return {saveNote, deleteNote, loadSaved, notes};
 }

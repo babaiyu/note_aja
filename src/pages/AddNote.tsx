@@ -29,7 +29,7 @@ interface Props extends RouteComponentProps<{}> {}
 const AddNote: React.FC<Props> = (props) => {
   // Props
   const {control, handleSubmit, errors} = useForm<InputForm>();
-  const {saveNote, notes} = useNote();
+  const {saveNote} = useNote();
 
   // Navigate Back
   const onBack = (e: any) => {
@@ -47,6 +47,9 @@ const AddNote: React.FC<Props> = (props) => {
     };
 
     saveNote(payload);
+    setTimeout(() => {
+      props.history.replace('/home');
+    }, 1000);
   };
 
   return (

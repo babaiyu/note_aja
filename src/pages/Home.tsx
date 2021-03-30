@@ -15,6 +15,7 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
+  useIonViewWillEnter,
 } from '@ionic/react';
 import {add, close, trash} from 'ionicons/icons';
 import {useState} from 'react';
@@ -27,7 +28,7 @@ interface Props extends RouteComponentProps<{}> {}
 const Home: React.FC<Props> = (props) => {
   // Props
   const {history} = props;
-  const {notes, deleteNote} = useNote();
+  const {notes, deleteNote, loadSaved} = useNote();
 
   // State
   const [noteDelete, setDelete] = useState<NoteProps>();
@@ -42,6 +43,11 @@ const Home: React.FC<Props> = (props) => {
   const onDelete = (note: any) => {
     setDelete(note);
   };
+
+  // useEffect
+  useIonViewWillEnter(() => {
+    loadSaved();
+  });
 
   return (
     <IonPage>
