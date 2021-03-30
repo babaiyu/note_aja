@@ -6,6 +6,7 @@ export interface NoteProps {
   id: string;
   title: string;
   description: string;
+  date: string;
 }
 
 const NOTES = 'notes';

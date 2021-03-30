@@ -16,6 +16,7 @@ import {
 import {close} from 'ionicons/icons';
 import {RouteComponentProps} from 'react-router';
 import {useForm, Controller} from 'react-hook-form';
+import dayjs from 'dayjs';
 import {useNote} from 'src/hooks/useNote';
 import './styles.css';
 
@@ -44,6 +45,7 @@ const AddNote: React.FC<Props> = (props) => {
     const payload = {
       ...data,
       id: `${titleLower}_${randomID}`,
+      date: dayjs().format('DD-MM-YYYY'),
     };
 
     saveNote(payload);
@@ -100,7 +102,10 @@ const AddNote: React.FC<Props> = (props) => {
               {errors.description && <small>{errors.description}</small>}
             </IonItem>
           )}></Controller>
-        <IonButton expand="block" onClick={handleSubmit(onSubmit)} className="content">
+        <IonButton
+          expand="block"
+          onClick={handleSubmit(onSubmit)}
+          className="content">
           TAMBAH
         </IonButton>
         <IonFab vertical="bottom" horizontal="end" slot="fixed">

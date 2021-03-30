@@ -16,6 +16,7 @@ import {
   IonToolbar,
   IonTitle,
   useIonViewWillEnter,
+  IonCardSubtitle,
 } from '@ionic/react';
 import {add, close, trash} from 'ionicons/icons';
 import {useState} from 'react';
@@ -64,6 +65,7 @@ const Home: React.FC<Props> = (props) => {
                 <IonCol size="12">
                   <IonCard onClick={() => onDelete(i)}>
                     <IonCardHeader>
+                      <IonCardSubtitle>{i.date}</IonCardSubtitle>
                       <IonCardTitle>{i.title}</IonCardTitle>
                     </IonCardHeader>
                     <IonCardContent>{i.description}</IonCardContent>
