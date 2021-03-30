@@ -1,0 +1,7 @@
+{
+  "name": "note_aja",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
