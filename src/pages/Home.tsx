@@ -21,7 +21,9 @@ import {
 import {add, close, trash} from 'ionicons/icons';
 import {useState} from 'react';
 import {RouteComponentProps} from 'react-router';
+import Lottie, {Options as LottieOptions} from 'react-lottie';
 import {NoteProps, useNote} from '../hooks/useNote';
+import emptyBox from '../assets/lottie/empty_box.json';
 import './styles.css';
 
 interface Props extends RouteComponentProps<{}> {}
@@ -50,6 +52,13 @@ const Home: React.FC<Props> = (props) => {
     loadSaved();
   });
 
+  // Config
+  const lottieOptions: LottieOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: emptyBox,
+  };
+
   return (
     <IonPage>
       <IonHeader>
@@ -76,7 +85,8 @@ const Home: React.FC<Props> = (props) => {
           ) : (
             <IonRow className="center">
               <IonCol size="12">
-                <p>Tidak ada note</p>
+                <Lottie height={400} width={400} options={lottieOptions} />
+                <small>Tidak Ada Data</small>
               </IonCol>
             </IonRow>
           )}
