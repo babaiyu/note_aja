@@ -25,14 +25,16 @@ const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route path="/home" render={require('src/pages/Home').default}></Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
+        <Route
+          path="/home"
+          component={require('src/pages/Home').default}></Route>
         <Route
           path="/addnote"
           component={require('src/pages/AddNote').default}
         />
+        <Route exact path="/">
+          <Redirect to="/home" />
+        </Route>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
