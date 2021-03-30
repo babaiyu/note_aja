@@ -29,7 +29,11 @@ const App: React.FC = () => (
           path="/home"
           component={require('src/pages/Home').default}></Route>
         <Route
-          path="/addnote"
+          path="/note/add"
+          component={require('src/pages/AddNote').default}
+        />
+        <Route
+          path="/note/edit/:id"
           component={require('src/pages/AddNote').default}
         />
         <Route exact path="/">

@@ -38,9 +38,32 @@ export function useNote() {
     }
   };
 
+  const loadByID = async (id: string) => {
+    let result = {};
+    const noteString = await get(NOTES);
+    const allNote = (noteString ? JSON.parse(noteString) : []) as NoteProps[];
+    for (let note of allNote) {
+      if (note.id === id) {
+        result = note;
+      }
+    }
+    return result;
+  };
+
+  const editNote = async (data: NoteProps) => {
+    let newNotes = notes;
+    for (let i in newNotes) {
+      if (newNotes[i].id === data.id) {
+        newNotes[i] = data;
+      }
+    }
+    set(NOTES, JSON.stringify(newNotes));
+    setNotes(newNotes);
+  };
+
   useEffect(() => {
     loadSaved();
   }, [get, set]);
 
-  return {saveNote, deleteNote, loadSaved, notes};
+  return {saveNote, deleteNote, loadSaved, loadByID, editNote, notes};
 }

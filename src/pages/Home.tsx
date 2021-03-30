@@ -18,7 +18,7 @@ import {
   IonCardSubtitle,
   useIonViewDidEnter,
 } from '@ionic/react';
-import {add, close, trash} from 'ionicons/icons';
+import {add, close, trash, pencil} from 'ionicons/icons';
 import {useState} from 'react';
 import {RouteComponentProps} from 'react-router';
 import Lottie, {Options as LottieOptions} from 'react-lottie';
@@ -39,7 +39,7 @@ const Home: React.FC<Props> = (props) => {
   // Navigate to Form Add Note
   const onAddNote = (e: any) => {
     e.preventDefault();
-    history.push('/addnote');
+    history.push('/note/add');
   };
 
   // Set Delete note
@@ -109,6 +109,16 @@ const Home: React.FC<Props> = (props) => {
               if (noteDelete) {
                 deleteNote(noteDelete);
                 setDelete(undefined);
+              }
+            },
+          },
+          {
+            text: 'Edit',
+            role: 'destructive',
+            icon: pencil,
+            handler: () => {
+              if (noteDelete) {
+                props.history.push(`/note/edit/${noteDelete.id}`);
               }
             },
           },
