@@ -1,22 +1,29 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import {IonContent, IonPage, IonFab, IonFabButton, IonIcon} from '@ionic/react';
+import {add} from 'ionicons/icons';
+import {RouteComponentProps} from 'react-router';
 import './Home.css';
 
-const Home: React.FC = () => {
+interface Props extends RouteComponentProps<{}> {}
+
+const Home: React.FC<Props> = (props) => {
+  // Props
+  const {history} = props;
+
+  // Navigate to Form Add Note
+  const onAddNote = (e: any) => {
+    e.preventDefault();
+    history.push('/addnote');
+  };
+
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Blank</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer />
+        <strong>Note Aja</strong>
+        <IonFab vertical="bottom" horizontal="end" slot="fixed">
+          <IonFabButton onClick={onAddNote}>
+            <IonIcon icon={add} />
+          </IonFabButton>
+        </IonFab>
       </IonContent>
     </IonPage>
   );
