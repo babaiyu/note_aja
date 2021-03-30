@@ -9,6 +9,7 @@ import {
   IonItem,
   IonLabel,
   IonPage,
+  IonText,
   IonTextarea,
   IonTitle,
   IonToolbar,
@@ -45,7 +46,7 @@ const AddNote: React.FC<Props> = (props) => {
     const payload = {
       ...data,
       id: `${titleLower}_${randomID}`,
-      date: dayjs().format('DD-MM-YYYY'),
+      date: dayjs().format('DD MMM, YYYY'),
     };
 
     saveNote(payload);
@@ -66,29 +67,37 @@ const AddNote: React.FC<Props> = (props) => {
           name="title"
           control={control}
           defaultValue=""
-          rules={{required: true}}
+          rules={{required: true, minLength: 3}}
           render={({onChange, onBlur, value}) => (
             <IonItem className="content">
-              <IonLabel position="floating">Title</IonLabel>
+              <IonLabel
+                position="floating"
+                color={errors.title ? 'danger' : undefined}>
+                Title
+              </IonLabel>
               <IonInput
                 name="title"
                 value={value}
                 onIonChange={onChange}
                 onIonBlur={onBlur}
                 debounce={10}
-                color={errors.title ? 'danger' : 'primary'}
+                color={errors.title ? 'danger' : undefined}
               />
-              {errors.title && <small>{errors.title}</small>}
+              {errors?.title && <IonText color="danger">Wajib Diisi!</IonText>}
             </IonItem>
           )}></Controller>
         <Controller
           name="description"
           control={control}
           defaultValue=""
-          rules={{required: true}}
+          rules={{required: true, minLength: 3}}
           render={({onChange, onBlur, value}) => (
             <IonItem className="content">
-              <IonLabel position="floating">Note</IonLabel>
+              <IonLabel
+                position="floating"
+                color={errors.title ? 'danger' : undefined}>
+                Note
+              </IonLabel>
               <IonTextarea
                 rows={6}
                 cols={20}
@@ -97,9 +106,11 @@ const AddNote: React.FC<Props> = (props) => {
                 value={value}
                 onBlur={onBlur}
                 onIonChange={onChange}
-                color={errors.description ? 'danger' : 'primary'}
+                color={errors.description ? 'danger' : undefined}
               />
-              {errors.description && <small>{errors.description}</small>}
+              {errors.description && (
+                <IonText color="danger">Wajib Diisi!</IonText>
+              )}
             </IonItem>
           )}></Controller>
         <IonButton

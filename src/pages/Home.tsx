@@ -15,8 +15,8 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
-  useIonViewWillEnter,
   IonCardSubtitle,
+  useIonViewDidEnter,
 } from '@ionic/react';
 import {add, close, trash} from 'ionicons/icons';
 import {useState} from 'react';
@@ -48,7 +48,7 @@ const Home: React.FC<Props> = (props) => {
   };
 
   // useEffect
-  useIonViewWillEnter(() => {
+  useIonViewDidEnter(() => {
     loadSaved();
   });
 
