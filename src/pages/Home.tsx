@@ -20,8 +20,7 @@ import {add, close, trash} from 'ionicons/icons';
 import {useState} from 'react';
 import {RouteComponentProps} from 'react-router';
 import {NoteProps, useNote} from '../hooks/useNote';
-
-import './Home.css';
+import './styles.css';
 
 interface Props extends RouteComponentProps<{}> {}
 
@@ -51,20 +50,28 @@ const Home: React.FC<Props> = (props) => {
           <IonTitle>Beranda</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
+      <IonContent fullscreen className="content">
         <IonGrid>
-          {notes.map((i) => (
-            <IonRow key={i.id}>
+          {notes.length > 0 ? (
+            notes.map((i) => (
+              <IonRow key={i.id}>
+                <IonCol size="12">
+                  <IonCard onClick={() => onDelete(i)}>
+                    <IonCardHeader>
+                      <IonCardTitle>{i.title}</IonCardTitle>
+                    </IonCardHeader>
+                    <IonCardContent>{i.description}</IonCardContent>
+                  </IonCard>
+                </IonCol>
+              </IonRow>
+            ))
+          ) : (
+            <IonRow className="center">
               <IonCol size="12">
-                <IonCard onClick={() => onDelete(i)}>
-                  <IonCardHeader>
-                    <IonCardTitle>{i.title}</IonCardTitle>
-                  </IonCardHeader>
-                  <IonCardContent>{i.description}</IonCardContent>
-                </IonCard>
+                <p>Tidak ada note</p>
               </IonCol>
             </IonRow>
-          ))}
+          )}
         </IonGrid>
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton onClick={onAddNote}>

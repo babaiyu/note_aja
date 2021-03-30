@@ -12,12 +12,12 @@ import {
   IonTextarea,
   IonTitle,
   IonToolbar,
-  useIonViewDidEnter,
 } from '@ionic/react';
 import {close} from 'ionicons/icons';
 import {RouteComponentProps} from 'react-router';
 import {useForm, Controller} from 'react-hook-form';
 import {useNote} from 'src/hooks/useNote';
+import './styles.css';
 
 type InputForm = {
   title: string;
@@ -57,14 +57,13 @@ const AddNote: React.FC<Props> = (props) => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <strong>Add Note</strong>
         <Controller
           name="title"
           control={control}
           defaultValue=""
           rules={{required: true}}
           render={({onChange, onBlur, value}) => (
-            <IonItem>
+            <IonItem className="content">
               <IonLabel position="floating">Title</IonLabel>
               <IonInput
                 name="title"
@@ -83,7 +82,7 @@ const AddNote: React.FC<Props> = (props) => {
           defaultValue=""
           rules={{required: true}}
           render={({onChange, onBlur, value}) => (
-            <IonItem>
+            <IonItem className="content">
               <IonLabel position="floating">Note</IonLabel>
               <IonTextarea
                 rows={6}
@@ -98,7 +97,7 @@ const AddNote: React.FC<Props> = (props) => {
               {errors.description && <small>{errors.description}</small>}
             </IonItem>
           )}></Controller>
-        <IonButton expand="block" onClick={handleSubmit(onSubmit)}>
+        <IonButton expand="block" onClick={handleSubmit(onSubmit)} className="content">
           TAMBAH
         </IonButton>
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
